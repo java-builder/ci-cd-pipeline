@@ -20,7 +20,6 @@ public class AuthenticationService {
     private final JwtService jwtService;
 
     public TokenResponse authenticate(LoginRequest request) {
-        log.info("Authenticating user {}", request.email());
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.email(), request.password());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
 
