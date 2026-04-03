@@ -1,0 +1,11 @@
+FROM maven:3.9.14-amazoncorretto-21 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn package -DskipTests
+
+FROM amazoncorretto:21
+WORKDIR /app
+COPY --from=build /app/target/*.jar javabuilder.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "javabuilder.jar"]
