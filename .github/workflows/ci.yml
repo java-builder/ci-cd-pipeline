@@ -3,6 +3,7 @@ run-name: ${{ github.actor }}
 on:
   push:
     branches:
+      - master
       - main
 
 jobs:
@@ -41,4 +42,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/backend-service:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/backend-service:{{ github.sha }}
