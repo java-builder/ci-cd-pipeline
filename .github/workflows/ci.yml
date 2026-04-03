@@ -1,4 +1,4 @@
-name: Continuous Integretion Pipeline (Maven Build, Test, Package, Docker)
+name: Continuous Integration Pipeline (Maven Build, Test, Package, Docker)
 run-name: ${{ github.actor }}
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build:
+  ci-pipeline:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
           cache: 'maven'
 
       - name: Run tests (Unit Test & Integration Test)
-        run: mvn package
+        run: mvn test
 
       - name: Build with Maven
         run: mvn package -DskipTests
