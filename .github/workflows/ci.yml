@@ -27,11 +27,7 @@ jobs:
         run: mvn test
 
       - name: SonarCloud Analysis
-        run: mvn sonar:sonar
-          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.organization=java-builder
-          -Dsonar.projectKey=java-builder_ci-cd-pipeline
-          -Dsonar.host.url=https://sonarcloud.io
+        uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
@@ -39,7 +35,7 @@ jobs:
         id: sonarqube-quality-gate-check
         uses: sonarsource/sonarqube-quality-gate-action@master
         with:
-          pollingTimeoutSec: 500
+          pollingTimeoutSec: 600
         env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             SONAR_HOST_URL: https://sonarcloud.io
