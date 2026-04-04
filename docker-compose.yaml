@@ -3,31 +3,40 @@ services:
     image: mysql:lts
     container_name: mysql
     ports:
-      - 3306:3306
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: banking_db
+      MYSQL_DATABASE: backend_service
     volumes:
-      - banking_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-p123456" ]
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - app_network
 
-  redis:
-    image: redis:8.2.4
-    container_name: redis
+  backend-service:
+    image: lekhanhduc/backend-service:${IMAGE_TAG}
+    container_name: backend-service
     ports:
-      - "6379:6379"
-    volumes:
-      - redis_banking:/data
-    healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
-      interval: 5s
-      timeout: 3s
-      retries: 5
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=backend_service
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=123456
+    networks:
+      - app_network
 
 volumes:
-  banking_data:
-  redis_banking:
+  mysql_data:
+
+networks:
+  app_network:
