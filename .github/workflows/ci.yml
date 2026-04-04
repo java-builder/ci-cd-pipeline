@@ -31,6 +31,7 @@ jobs:
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
           -Dsonar.organization=java-builder
           -Dsonar.projectKey=java-builder_ci-cd-pipeline
+          -Dsonar.host.url=https://sonarcloud.io
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
@@ -41,6 +42,7 @@ jobs:
           pollingTimeoutSec: 500
         env:
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: https://sonarcloud.io
 
       - name: Build with Maven
         run: mvn package -DskipTests
