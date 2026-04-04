@@ -27,7 +27,10 @@ jobs:
         run: mvn test
 
       - name: SonarCloud Analysis
-        uses: SonarSource/sonarqube-scan-action@v7.1.0
+        run: mvn sonar:sonar
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.organization=java-builder
+          -Dsonar.projectKey=java-builder_ci-cd-pipeline
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
