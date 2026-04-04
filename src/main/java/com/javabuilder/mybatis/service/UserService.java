@@ -16,14 +16,12 @@ import com.javabuilder.mybatis.mapper.UserMapper;
 import com.javabuilder.mybatis.model.Role;
 import com.javabuilder.mybatis.model.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class UserService {
 
     private final UserMapper userMapper;
