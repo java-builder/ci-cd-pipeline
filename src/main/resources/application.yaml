@@ -1,6 +1,6 @@
 spring:
   application:
-    name: mybatis
+    name: backend-service
 
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
