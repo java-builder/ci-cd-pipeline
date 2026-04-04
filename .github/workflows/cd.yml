@@ -31,7 +31,3 @@ jobs:
             sudo docker compose up -d --force-recreate backend-service
             sudo docker image prune -f
             echo "Deploy EC2 Successfully!"
-            
-            
-
-

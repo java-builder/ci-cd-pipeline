@@ -44,6 +44,7 @@ public class UserService {
         userMapper.insert(user);
         userRoleService.addRoleToUser(user.getId(), role.getId());
 
+        log.info("User created with email: {}", user.getEmail());
         return userConverter.toCreateUserResponse(user);
     }
 
