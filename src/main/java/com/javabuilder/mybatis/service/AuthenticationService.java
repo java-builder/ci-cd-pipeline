@@ -23,7 +23,7 @@ public class AuthenticationService {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.email(), request.password());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
 
-        log.info("Authenticated user: {}", request.email());
+        log.info("Login success with email: {}", request.email());
 
         UserPrincipal userPrincipal = (UserPrincipal) authenticate.getPrincipal();
 
