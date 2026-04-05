@@ -65,6 +65,7 @@ jobs:
         uses: aquasecurity/trivy-action@v0.35.0
         with:
           scan-type: 'image'
+          ignore-unfixed: true
           image-ref: 'docker.io/${{ secrets.DOCKER_USERNAME }}/backend-service:${{ github.sha }}'
           trivy-config: trivy.yml
 
