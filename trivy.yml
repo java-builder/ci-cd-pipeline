@@ -1,6 +1,4 @@
-format: json
+format: table
 ignore-unfixed: true
 exit-code: 1
 severity: CRITICAL,HIGH
-secret:
-  config: config/trivy/secret.yaml
