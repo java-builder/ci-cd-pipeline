@@ -52,10 +52,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Docker Image
+      - name: Build Docker Image
         uses: docker/build-push-action@v7
         with:
           context: .
           file: ./Dockerfile
-          push: true
+          push: false
+          load: true
           tags: ${{ secrets.DOCKER_USERNAME }}/backend-service:${{ github.sha }}
+
+      - name: Run Trivy vulnerability scanner  (Docker image)
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: 'image'
+          format: 'table'
+          image-ref: 'docker.io/${{ secrets.DOCKER_USERNAME }}/backend-service:${{ github.sha }}'
+          trivy-config: trivy.yml
+
+      - name: Push Docker Image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/backend-service:${{ github.sha }}
