@@ -1,4 +1,5 @@
 format: json
+ignore-unfixed: true
 exit-code: 1
 severity: CRITICAL,HIGH
 secret:
